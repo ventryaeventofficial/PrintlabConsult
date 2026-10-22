@@ -215,6 +215,17 @@ const authenticateAdmin = async (req, res, next) => {
   }
 };
 
+
+const path = require('path');
+
+// 1. Serve static HTML, CSS, JS, and image assets from the root directory
+app.use(express.static(path.join(__dirname)));
+
+// 2. Fallback route: serve index.html for root GET requests
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // ==========================================================================
 // 4. PUBLIC ENDPOINTS
 // ==========================================================================
