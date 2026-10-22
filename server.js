@@ -9,7 +9,33 @@ require("dotenv").config();
 
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
-const serviceAccount = require("./serviceAccountKey.json");
+const admin = require('firebase-admin');
+
+let serviceAccount;
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+  // Production (Render): Parse the JSON string from Environment Variables
+  try {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+  } catch (err) {
+    console.error("Failed to parse FIREBASE_SERVICE_ACCOUNT_JSON:", err);
+  }
+} else {
+  // Local Development: Require local file
+  try {
+    serviceAccount = require('./serviceAccountKey.json');
+  } catch (err) {
+    console.warn("Local serviceAccountKey.json not found.");
+  }
+}
+
+if (serviceAccount) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+} else {
+  console.error("Firebase Admin SDK failed to initialize: No credentials provided.");
+}
 
 // ==========================================================================
 // 1. INITIALIZATION & MIDDLEWARE SETUP
@@ -25,10 +51,10 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Firebase Admin SDK
-initializeApp({
-  credential: cert(serviceAccount),
-});
-console.log("🟢 Firebase Admin SDK Initialized");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
+// console.log("🟢 Firebase Admin SDK Initialized");
 
 const makeAuthenticatedRequest = async () => {
   const auth = getAuth();
