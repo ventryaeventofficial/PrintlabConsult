@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/images/TitleBar-Logo2.png">
+  <title>Home | Printlab Consult</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <!-- <i data-lucide="blocks" class="brand-icon"></i> MODULARS -->
+         <img src="/images/Printlab Logo.png"/>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" >Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Service</a></li>
+        <li><a href="#projects">Portfolio</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+
+      <!-- CTA Button & Mobile Hamburger -->
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a href="#contact" id="openModalBtn" class="btn btn-primary">Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <!-- Decorative starburst -->
+        <svg class="starburst" style="top: -20px; left: 180px;" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+        </svg>
+        <h3>Brand   •   Print  •   Design    </h3>
+        <h1>Print Beyond Expectations.</h1>
+        <p>From stunning print production to strategic branding and creative design, Printlab Consult transforms your ideas into high-quality visual experiences that make a lasting impression.</p>
+        
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">Explore</a>
+        </div>
+      </div>
+
+      <div class="hero-gallery">
+        <div class="arch-card">
+          <img src="/images/Hero-Image.png">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services-section" id="services">
+    <div class="container" id="servicesContainer">
+      <div class="services-header-wrapper">
+        <div>
+          <div class="section-label">OUR SERVICES</div>
+          <h2>Everything Your Brand Needs Under One Roof</h2>
+        </div>
+        <!-- Scroll Navigation Controls -->
+        <div class="scroll-controls">
+          <button class="scroll-btn" id="servicesScrollLeft" aria-label="Scroll services left">
+            <i data-lucide="arrow-left" style="width: 20px;"></i>
+          </button>
+          <button class="scroll-btn" id="servicesScrollRight" aria-label="Scroll services right">
+            <i data-lucide="arrow-right" style="width: 20px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Scroll Track -->
+      <div class="services-track" id="servicesTrack">
+        <!-- Service Card 1 -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon">
+                <i class="fa-solid fa-bezier-curve"></i>
+              </div>
+              <span class="service-badge">Design</span>
+            </div>
+            <h3>Graphic Design</h3>
+            <p>Creative designs that capture attention and communicate your message effectively.
+              Logo Design,
+              Brand Identity,
+              Social Media Graphics,
+              Flyers & Posters,
+              Brochures,
+              Business Cards.</p>
+          </div>
+         
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon">
+                <i class="fa-solid fa-print"></i>
+              </div>
+              <span class="service-badge">Printing</span>
+            </div>
+            <h3>Commercial Printing</h3>
+            <p>High-quality printing using vibrant colors and premium materials.
+            Digital Printing,
+            Offset Printing,
+            Large Format Printing,
+            Event Materials,
+            Promotional Items,
+            Corporate Stationery.</p>
+          </div>
+         
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon">
+                <i class="fa-solid fa-font-awesome"></i>
+              </div>
+              <span class="service-badge">Solution</span>
+            </div>
+            <h3>Branding Solutions</h3>
+            <p>Build a memorable brand that stands out.
+              Brand Strategy,
+              Corporate Branding,
+              Packaging Design,
+              Product Labels,
+              Vehicle Branding,
+              Office Branding.</p>
+          </div>
+         
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+              </div>
+              <span class="service-badge">Promotions</span>
+            </div>
+            <h3>Promotional Products</h3>
+            <p>Increase brand visibility with customized promotional materials.
+                Such as, T-Shirts, Mugs, Pens, Bags, Caps, Gift Items</p>
+          </div>
+         
+        </div>
+
+        <!-- Service Card 5 -->
+        <div class="service-card">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon">
+                <i class="fa-solid fa-display"></i>
+              </div>
+              <span class="service-badge">Displays</span>
+            </div>
+            <h3>Signage & Displays</h3>
+            <p>Professional indoor and outdoor branding solutions. 
+              Such as, Roll-Up Banners,
+              Outdoor Signage,
+              Light Boxes,
+              Exhibition Stands,
+              Wall Branding,
+              Window Graphics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT US ================= -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+
+      <div class="about-content">
+        <div class="section-label">ABOUT US</div>
+        <h2>Bringing Creativity to Life Through Print & Design</h2>
+        <p>
+            At Printlab Consult, we believe every brand deserves to be seen, remembered, and admired.
+            We combine creativity, precision, and premium production techniques to deliver exceptional print and branding solutions that help businesses communicate with confidence.
+            Whether you're launching a new business, refreshing your brand identity, or promoting your next campaign, our team works closely with you to produce results that exceed expectations.
+            <br/>
+            <br/>
+            Our Promise
+            <br/>
+            Premium Quality  •    
+            Fast Turnaround     •
+            Creative Excellence     •
+            Affordable Pricing      •
+            Reliable Customer Support
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MEET THE TEAM ================= -->
+  <section class="team-section" id="team">
+    <div class="container">
+      <div class="team-header">
+        <div>
+          <div class="section-label">OUR TEAM</div>
+          <h2>Meet the Creative Minds behind every great impression.</h2>
+        </div>
+        <p>We are a passionate team of designers, print specialists, branding experts, and customer service professionals
+          united by one goal. Which is helping businesses communicate with confidence through exceptional design and high-quality print solutions.</p>
+      <div class="scroll-controls">
+        <button id="teamScrollLeft" class="scroll-btn"><i data-lucide="chevron-left"></i></button>
+        <button id="teamScrollRight" class="scroll-btn"><i data-lucide="chevron-right"></i></button>
+      </div>
+      </div>
+
+      <div id="public-team-container" class="team-grid">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="process">
+    <div class="container process-grid">
+      <div class="process-intro">
+        <div class="section-label">OUR PROCESS</div>
+        <h2>Simple. Transparent. Efficient.</h2>
+        <div class="process-dets">
+          <h3>At Printlab Consult, we understand that every project is unique. That's why we've developed a simple, transparent, and collaborative process that ensures your ideas are transformed into exceptional results—on time and within budget.
+                <br/>
+                <br/>
+              Whether you're printing business cards, branding an office, launching a new product, or executing a full marketing campaign, we guide you every step of the way.</h3>
+        </div>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step active">
+          <div class="step-left">
+            <div class="step-num">01.</div>
+            <div class="step-title">
+              <h3>Consultation & Discovery</h3>
+            </div>
+          </div>
+          <div class="step-desc">
+            We start by learning about your business, your goals, your audience, and the purpose of your project.
+            During this stage, we discuss your ideas, preferences, budget, timeline, and any existing brand materials you may have.
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-step">
+          <div class="step-left">
+            <div class="step-num">02.</div>
+            <div class="step-title">
+              <h3>Strategy, Design & Development</h3>
+            </div>
+          </div>
+          <div class="step-desc">
+            Once the project is approved, our creative team begins crafting designs that communicate your message 
+            effectively while staying true to your brand identity. If you already have artwork, we carefully review and optimize it for professional production.
+             If not, we'll create custom designs from scratch that reflect your vision.
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-step">
+          <div class="step-left">
+            <div class="step-num">03.</div>
+            <div class="step-title">
+              <h3>Production & Quality Assurance</h3>
+            </div>
+          </div>
+          <div class="step-desc">
+            After approval, your project moves into production using premium materials, 
+            advanced printing technology, and industry best practices.
+
+            Every item undergoes strict quality checks to ensure vibrant colors, 
+            sharp details, durable finishes, and flawless craftsmanship. 
+           </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-step">
+          <div class="step-left">
+            <div class="step-num">04.</div>
+            <div class="step-title">
+              <h3>Delivery & Project Completion</h3>
+            </div>
+          </div>
+          <div class="step-desc">
+            Once production is complete, your order is carefully packaged and prepared for pickup or delivery.
+            We work with trusted logistics partners to ensure your products arrive safely and on schedule.
+            For larger branding installations or signage projects, our experienced installation team handles the setup professionally.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAST PROJECTS / CATEGORIES ================= -->
+  <section class="projects-section" id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <div>
+        <div class="section-label">PAST PROJECTS</div>
+        <h2>Explore our work by category</h2>
+      </div>
+      <!-- Scroll Navigation Controls for Category Track -->
+      <div class="scroll-controls">
+        <button class="scroll-btn" id="scrollLeft" aria-label="Scroll left">
+          <i data-lucide="arrow-left" style="width: 20px;"></i>
+        </button>
+        <button class="scroll-btn" id="scrollRight" aria-label="Scroll right">
+          <i data-lucide="arrow-right" style="width: 20px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 1. Dynamic Horizontal Category Track -->
+    <div class="categories-track" id="categoriesTrack">
+      <!-- Dynamic category cards from backend render here -->
+    </div>
+
+  
+      <!-- Projects Grid -->
+      <div id="projectsGrid" class="projects-grid">
+        <!-- Dynamically populated project cards render here -->
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ================= TESTIMONIALS / REVIEWS ================= -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-label">CLIENT REVIEWS</div>
+        <h2>What Our Clients Say About Us</h2>
+        <p>Great work speaks for itself, but our clients say it even better. Check out what they have been saying about us.</p>
+      </div>
+
+      <div id="publicTestimonialsGrid" class="testimonials-grid"></div>
+
+            <!-- Add Review CTA Button -->
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <button id="openReviewModalBtn" class="btn-primary" style="display: inline-flex; 
+      align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; width: 10rem; height: 3rem; border-radius: 50px;">
+        <i data-lucide="message-square-plus" style="width: 18px;"></i> Leave a Review
+      </button>
+    </div>
+  </section>
+
+ <!-- ================= FAQ SECTION ================= -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-header">
+        <div class="section-label">FREQUENTLY ASKED QUESTIONS</div>
+        <h2>Got Questions? We've Got Answers.</h2>
+        <p>
+          We understand that starting a printing or branding project can come with
+          a lot of questions. That's why we've put together answers to some of the 
+          questions our clients ask most often.
+          If you can't find what you're looking for, our team is always happy to help.
+        </p>
+      </div>
+
+      <div class="faq-accordion" id="faq-accordion">
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEWSLETTER BANNER (MAIN BODY) ================= -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-banner">
+        <div class="newsletter-content">
+          <h3>Sign up for our newsletter</h3>
+          <p>Get the latest articles, design resources, and agency news delivered straight to your inbox.</p>
+        </div>
+        <form id="newsletter-form" class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Enter your email" required />
+          <button type="submit" aria-label="Submit Newsletter"><i data-lucide="arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand & Business Hours -->
+        <div class="footer-brand">
+          <a href="#" class="brand">
+            <img src="/images/Printlab Logo.png"/>
+          </a>
+          <p class="footer-bio">
+            Creative Design • Premium Printing • Branding Solutions
+          </p>
+          <div class="footer-hours">
+            <h5><i data-lucide="clock" style="width: 16px;"></i> Business Hours</h5>
+            <p>
+              Monday – Friday: 8:00 AM – 6:00 PM<br>
+              Saturday: 9:00 AM – 3:00 PM<br>
+              Sunday: Closed
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Portfolio</a></li>
+            <li><a href="#" id="openModalBtn">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Graphic Design</a></li>
+            <li><a href="#services">Printing</a></li>
+            <li><a href="#services">Branding</a></li>
+            <li><a href="#services">Promotional Products</a></li>
+            <li><a href="#services">Signage</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact Info & Socials -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="contact-list">
+            <li>
+              <i data-lucide="map-pin" style="width: 18px;"></i>
+              <span>No. 121, Isolo Road, Mushin, Lagos.</span>
+            </li>
+            <li>
+              <i data-lucide="phone" style="width: 18px;"></i>
+              <a href="tel:+2347073165168">+234 707 316 5168</a>
+            </li>
+            <li>
+              <i data-lucide="mail" style="width: 18px;"></i>
+              <a href="mailto:hello@printlabconsult.com">hello@printlabconsult.com</a>
+            </li>
+          </ul>
+
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61592502357698" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="https://www.instagram.com/printlabconsult" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-square-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-square-linkedin"></i></i></a>
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-square-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+
+        </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Printlab Consult. All rights reserved.</p>
+        <p>Developed by Brandace Inc. Tel.: 08029453879</p>
+      </div>
+    </div>
+
+    <!-- ================= SCROLL TO TOP BUTTON ================= -->
+  <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to top">
+    <i data-lucide="arrow-up" style="width: 22px;"></i>
+  </button>
+  </footer>
+
+<script src="script.js"></script>
+
+<!-- ================= BOOKING MODAL ================= -->
+<div class="modal-overlay" id="bookingModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-labelledby="modalTitle">
+    
+    <!-- Close Button -->
+    <button class="modal-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
+    
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div class="section-label">BOOKING & QUOTES</div>
+      <h2 id="modalTitle">Start Your Project</h2>
+      <p>Fill in the details below to schedule production or get an instant consultation.</p>
+    </div>
+
+    <!-- Booking Form -->
+    <form id="bookingForm" class="booking-form">
+      <div class="form-group">
+        <label for="clientName">Full Name</label>
+        <input type="text" id="clientName" placeholder="e.g. Alex Johnson" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="clientPhone">Phone Number</label>
+          <input type="tel" id="clientPhone" placeholder="+234..." required />
+        </div>
+        <div class="form-group">
+          <label for="clientEmail">Email Address</label>
+          <input type="email" id="clientEmail" placeholder="alex@example.com" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceSelect">Service Required</label>
+        <select id="serviceSelect" required>
+          <option value="" disabled selected>Select a service</option>
+          <option value="Graphic Design">Graphic Design</option>
+          <option value="Commercial Printing">Commercial Printing</option>
+          <option value="Branding Solutions">Branding Solutions</option>
+          <option value="Promotional Products">Promotional Products</option>
+          <option value="Signage & Displays">Signage & Displays</option>
+          <option value="Other / Custom Request">Other / Custom Request</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="deliveryDate">Target Delivery Date</label>
+          <input type="date" id="deliveryDate" required />
+        </div>
+        <div class="form-group">
+          <label for="deliveryTime">Preferred Time</label>
+          <input type="time" id="deliveryTime" required />
+        </div>
+      </div>
+
+      <!-- Simple Inline Status Message Banner -->
+      <div id="formStatusBanner" class="status-banner hidden" role="alert"></div>
+
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-full">Submit Booking</button>
+        <button type="button" id="whatsappBookingBtn" class="btn btn-whatsapp btn-full">
+          <i class="fa-brands fa-whatsapp"></i> Book via WhatsApp
+        </button>
+      </div>
+      
+    </form>
+
+  </div>
+</div>
+
+<!-- Floating Toast Notification Container -->
+<div id="toastNotification" class="toast-notification hidden" role="alert">
+  <span id="toastMessage">Notification message here</span>
+</div>
+
+<!-- Client Review Submission Modal -->
+<div id="clientReviewModal" class="image-modal" aria-hidden="true">
+  <div class="image-modal-overlay" id="reviewModalOverlay"></div>
+  <div class="image-modal-content" style="max-width: 550px; padding: 2rem;">
+    <button class="image-modal-close" id="closeReviewModalBtn" aria-label="Close Modal">&times;</button>
+    
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-size: 1.6rem; font-weight: 700; color: #111;">Share Your Experience</h2>
+      <p style="color: #666; font-size: 0.9rem; margin-top: 0.3rem;">We value your feedback! Let us know how we did.</p>
+    </div>
+
+    <form id="clientReviewForm">
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #333;">Your Name *</label>
+        <input type="text" id="crName" required placeholder="e.g. David Okonkwo" style="width: 100%; padding: 0.75rem; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 0.95rem; outline: none;" />
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #333;">Your Role / Company *</label>
+        <input type="text" id="crRole" required placeholder="e.g. Founder, TechHub or Lagos Resident" style="width: 100%; padding: 0.75rem; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 0.95rem; outline: none;" />
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #333;">Rating *</label>
+        <select id="crRating" required style="width: 100%; padding: 0.75rem; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 0.95rem; outline: none; background: #fff;">
+          <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+          <option value="4">⭐⭐⭐⭐ Great (4/5)</option>
+          <option value="3">⭐⭐⭐ Average (3/5)</option>
+          <option value="2">⭐⭐ Poor (2/5)</option>
+          <option value="1">⭐ Terrible (1/5)</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: #333;">Your Review / Testimony *</label>
+        <textarea id="crTestimony" rows="4" required placeholder="Write your review here..." style="width: 100%; padding: 0.75rem; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 0.95rem; outline: none; resize: vertical;"></textarea>
+      </div>
+
+      <div id="reviewStatusMsg" style="display: none; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; text-align: center;"></div>
+
+      <button type="submit" id="submitReviewBtn" style="width: 100%; background: #18181b; color: #ffffff; border: none; padding: 0.85rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">
+        Submit Review
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+</body>
+</html>

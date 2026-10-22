@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/images/TitleBar-Logo2.png">
+  <title>Admin Dashboard | Printlab Consult</title>
+  <link rel="stylesheet" href="admin.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js for Interactive Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+  <div class="sidebar-brand">
+    <div>
+      <h1>PrintLab<span>.Admin</span></h1>
+      <span class="badge-live">Live System</span>
+    </div>
+    <!-- Collapse Button -->
+    <button id="toggle-sidebar-btn" class="sidebar-toggle-btn" title="Collapse Sidebar">
+      <i data-lucide="panel-left-close"></i>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <button class="nav-btn active" data-target="dashboard-view">
+      <i data-lucide="layout-dashboard"></i> Dashboard
+    </button>
+    <button class="nav-btn" data-target="services-view">
+      <i data-lucide="layers"></i> Services
+    </button>
+    <button class="nav-btn" data-target="team-view">
+      <i data-lucide="users"></i> Team
+    </button>
+    <button class="nav-btn" data-target="portfolio-view">
+      <i data-lucide="folder-kanban"></i> Portfolio
+    </button>
+    <button class="nav-btn" data-target="marketing-view">
+      <i data-lucide="message-square"></i> Marketing & FAQs
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button id="command-palette-trigger" class="btn btn-secondary full-width">
+      <i data-lucide="search"></i> Search <kbd>⌘K</kbd>
+    </button>
+  </div>
+</aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+
+      <!-- Unified Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <!-- Floating Expand Button (Visible when sidebar is collapsed) -->
+    <button id="expand-sidebar-btn" class="sidebar-expand-btn hidden" title="Expand Sidebar">
+      <i data-lucide="panel-left-open"></i>
+    </button>
+          <h2 id="view-title">Dashboard Overview</h2>
+        </div>
+        <div class="header-right">
+  
+          <div class="admin-user-info">
+            <span id="admin-name">Loading...</span>
+            <button id="logout-btn" class="btn btn-danger">Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-container">
+
+        <!-- ========================================== -->
+        <!-- VIEW 1: DASHBOARD OVERVIEW                -->
+        <!-- ========================================== -->
+        <div id="dashboard-view" class="tab-view active">
+          <!-- Analytics Charts Section -->
+          <section class="charts-grid">
+            <div class="admin-card chart-card">
+              <h3>Monthly Booking Volume</h3>
+              <canvas id="bookingsChart"></canvas>
+            </div>
+            <div class="admin-card chart-card">
+              <h3>Service Distribution</h3>
+              <canvas id="servicesChart"></canvas>
+            </div>
+          </section>
+
+          <!-- Metrics Stats Grid -->
+          <section class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon total"><i data-lucide="folder-kanban"></i></div>
+              <div class="metric-data">
+                <span class="metric-label">Total Bookings</span>
+                <h2 id="totalCount">0</h2>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon pending"><i data-lucide="clock"></i></div>
+              <div class="metric-data">
+                <span class="metric-label">Pending</span>
+                <h2 id="pendingCount">0</h2>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon confirmed"><i data-lucide="check-circle-2"></i></div>
+              <div class="metric-data">
+                <span class="metric-label">Confirmed</span>
+                <h2 id="confirmedCount">0</h2>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon completed"><i data-lucide="sparkles"></i></div>
+              <div class="metric-data">
+                <span class="metric-label">Completed</span>
+                <h2 id="completedCount">0</h2>
+              </div>
+            </div>
+          </section>
+
+          <!-- Controls & Filters -->
+          <section class="table-controls">
+            <div class="search-box">
+              <i data-lucide="search"></i>
+              <input type="text" id="searchInput" placeholder="Search by name, email, or booking ID..." />
+            </div>
+
+            <div class="filter-group">
+              <select id="statusFilter">
+                <option value="ALL">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+
+              <select id="serviceFilter">
+                <option value="ALL">All Services</option>
+                <option value="Graphic Design">Graphic Design</option>
+                <option value="Commercial Printing">Commercial Printing</option>
+                <option value="Branding Solutions">Branding Solutions</option>
+                <option value="Promotional Products">Promotional Products</option>
+                <option value="Signage & Displays">Signage & Displays</option>
+                <option value="Other / Custom Request">Other / Custom Request</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- Bulk Actions Bar -->
+          <div id="bulk-actions-bar" class="bulk-actions-bar hidden">
+            <span id="selected-count">0 items selected</span>
+            <button id="bulk-delete-btn" class="btn btn-danger btn-sm">Delete Selected</button>
+          </div>
+
+          <!-- Data Table -->
+          <main class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all-bookings" /></th>
+                  <th>ID / Date</th>
+                  <th>Client Info</th>
+                  <th>Service Requested</th>
+                  <th>Target Date & Time</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <!-- Skeleton Loading Rows -->
+                <tr class="skeleton-row">
+                  <td colspan="7"><div class="skeleton"></div></td>
+                </tr>
+                <tr class="skeleton-row">
+                  <td colspan="7"><div class="skeleton"></div></td>
+                </tr>
+              </tbody>
+            </table>
+            <div id="emptyState" class="table-state hidden">No booking records found.</div>
+          </main>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: SERVICES MANAGEMENT                -->
+        <!-- ========================================== -->
+        <div id="services-view" class="tab-view hidden">
+          <section class="admin-card">
+            <h2>Manage Services</h2>
+            <form id="add-service-form" class="form-grid-4">
+              <input type="text" id="service-title" placeholder="Service Title" required />
+              <input type="text" id="service-desc" placeholder="Brief Description" required />
+              <input type="text" id="service-badge" placeholder="Badge (e.g. Design)" />
+              
+              <select id="service-icon">
+                <option value="layers">Layers (Default)</option>
+                <option value="printer">Printer</option>
+                <option value="palette">Palette</option>
+                <option value="shirt">Shirt / Apparel</option>
+                <option value="package">Package / Branding</option>
+                <option value="image">Image / Media</option>
+              </select>
+
+              <button type="submit" id="add-service-btn" class="btn btn-primary full-width">Add Service</button>
+            </form>
+
+            <hr class="divider" />
+            <div id="services-grid-admin" class="card-grid"></div>
+          </section>
+        </div>
+
+        <!-- ========================================== -->
+<!-- VIEW 3: TEAM MANAGEMENT                    -->
+<!-- ========================================== -->
+<div id="team-view" class="tab-view hidden">
+  <section id="team-section" class="admin-card">
+    <h2 id="team-form-title">Add New Team Member</h2>
+
+    <form id="team-form" enctype="multipart/form-data">
+      <input type="hidden" id="team-member-id" value="" />
+
+      <div class="team-form-grid">
+        <div class="form-group">
+          <label for="team-name">Full Name *</label>
+          <input type="text" id="team-name" placeholder="e.g. Jane Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label for="team-role">Role *</label>
+          <input type="text" id="team-role" placeholder="e.g. Senior Graphic Designer" required />
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="team-linkedin">LinkedIn Profile URL</label>
+          <input type="url" id="team-linkedin" placeholder="https://linkedin.com/in/..." />
+        </div>
+
+        <div class="form-group">
+          <label for="team-twitter">Twitter / X Profile URL</label>
+          <input type="url" id="team-twitter" placeholder="https://x.com/..." />
+        </div> -->
+
+        <div class="form-group full-width">
+          <label for="team-image-file">Profile Photo</label>
+          <input type="file" id="team-image-file" name="image" accept="image/*" />
+        </div>
+
+        <div id="image-preview-container" class="hidden full-width image-preview-box">
+          <img id="team-image-preview" src="" alt="Selected Photo Preview" />
+          <div>
+            <p class="preview-title">Photo Preview</p>
+            <p class="preview-sub">Will be uploaded to Cloudinary</p>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="team-bio">Favourite Phrase</label>
+          <textarea id="team-bio" placeholder="Write a short phrase that you love most..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" id="save-team-btn" class="btn btn-primary">Add Member</button>
+        <button type="button" id="cancel-team-edit-btn" class="btn btn-secondary hidden" onclick="resetTeamForm()">Cancel Edit</button>
+      </div>
+    </form>
+
+    <hr class="divider" />
+    <h3>Current Team Members</h3>
+    <div id="admin-team-list" class="team-cards-grid"></div>
+  </section>
+</div>
+
+       <!-- ========================================== -->
+<!-- VIEW 4: PORTFOLIO & CATEGORIES            -->
+<!-- ========================================== -->
+<div id="portfolio-view" class="tab-view hidden">
+  <div class="portfolio-grid-layout">
+    
+    <!-- Category Management Card -->
+    <div class="admin-card">
+      <h2>Manage Project Categories</h2>
+      <form id="createCategoryForm">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="categoryName">Category Name *</label>
+            <input type="text" id="categoryName" placeholder="e.g. Large Format, Branding" required />
+          </div>
+          <div class="form-group">
+            <label for="categoryDescription">Description (Optional)</label>
+            <input type="text" id="categoryDescription" placeholder="Brief category note..." />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Category</button>
+      </form>
+
+      <hr class="divider" />
+      <h3>Existing Categories</h3>
+      <div id="categoriesList" class="category-badge-list"></div>
+    </div>
+
+    <!-- Upload Project Card -->
+    <div class="admin-card">
+      <h2>Upload New Past Project</h2>
+      <form id="uploadProjectForm" enctype="multipart/form-data">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="projectTitle">Project Title *</label>
+            <input type="text" id="projectTitle" placeholder="e.g. Event Backdrop Banner" required />
+          </div>
+
+          <div class="form-group">
+            <label for="projectCategory">Select Category *</label>
+            <select class="cat-select" id="projectCategory" required>
+              <option value="">-- Choose a Category --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="clientName">Client Name (Optional)</label>
+            <input type="text" id="clientName" placeholder="e.g. Printlab Consult" />
+          </div>
+
+          <div class="form-group">
+            <label for="projectImage">Project Photo *</label>
+            <input type="file" id="projectImage" accept="image/*" required />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="projectDescription">Project Details / Summary</label>
+            <textarea id="projectDescription" rows="3" placeholder="Describe materials used or scope..."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" id="uploadProjectBtn" class="btn btn-primary">Upload Project</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Portfolio Table -->
+  <div class="admin-card full-width">
+    <h2>Uploaded Portfolio Projects</h2>
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="projectsTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+     <!-- ========================================== -->
+<!-- VIEW 5: MARKETING & FAQS                   -->
+<!-- ========================================== -->
+<div id="marketing-view" class="tab-view hidden">
+  <div class="marketing-grid-layout">
+
+    <!-- Manage Testimonials Card -->
+    <section class="admin-card">
+      <h2>Manage Client Testimonials</h2>
+      <form id="testimonialForm">
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="tClientName">Client Name *</label>
+            <input type="text" id="tClientName" placeholder="e.g. Sarah Jenkins" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tClientRole">Role / Company *</label>
+            <input type="text" id="tClientRole" placeholder="e.g. CEO, Apex Brands" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tRating">Star Rating *</label>
+            <select id="tRating" required>
+              <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+              <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+              <option value="3">⭐⭐⭐ (3 Stars)</option>
+              <option value="2">⭐⭐ (2 Stars)</option>
+              <option value="1">⭐ (1 Star)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="tContent">Testimony / Review *</label>
+          <textarea id="tContent" rows="3" placeholder="Write client feedback here..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Publish Testimonial</button>
+      </form>
+
+      <hr class="divider" />
+      <h3>Published Testimonials</h3>
+      <div id="adminTestimonialList" class="testimonial-cards-grid"></div>
+    </section>
+
+    <!-- Manage FAQs Card -->
+    <section class="admin-card">
+      <h2>Manage FAQs</h2>
+      <form id="faq-form" onsubmit="handleAddFaq(event)">
+        <div class="form-row-2">
+          <div class="form-group full-width">
+            <label for="faq-question">Question *</label>
+            <input type="text" id="faq-question" placeholder="e.g. How long does production take?" required />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="faq-answer">Answer *</label>
+            <textarea id="faq-answer" rows="3" placeholder="Standard turnaround time..." required></textarea>
+          </div>
+        </div>
+
+        <button type="submit" id="faq-submit-btn" class="btn btn-primary">Add FAQ</button>
+      </form>
+
+      <hr class="divider" />
+      <h3>Existing FAQs</h3>
+      <div id="admin-faqs-list" class="faq-list-grid"></div>
+    </section>
+
+    <!-- Subscribers Card -->
+    <section class="admin-card">
+      <div class="section-header-flex">
+        <div>
+          <h2>Newsletter Subscribers</h2>
+          <p class="subtext">Users who opted in via the homepage</p>
+        </div>
+        <div class="flex-actions">
+          <span id="subscriber-count-badge" class="badge-count">0 Subscribers</span>
+          <button type="button" onclick="exportSubscribersToCSV()" class="btn btn-secondary">
+            <i data-lucide="download"></i> Export CSV
+          </button>
+        </div>
+      </div>
+      <div id="admin-subscribers-list" class="subscribers-table-container"></div>
+    </section>
+
+  </div>
+</div>
+
+  <!-- Global Command Palette Modal (Cmd+K) -->
+  <div id="command-modal" class="modal-overlay hidden">
+    <div class="command-card">
+      <div class="command-header">
+        <i data-lucide="search"></i>
+        <input type="text" id="command-input" placeholder="Search commands, navigate tabs, or quick actions..." />
+      </div>
+      <div id="command-results" class="command-results">
+        <div class="command-item" onclick="switchTab('dashboard-view')">Go to Dashboard</div>
+        <div class="command-item" onclick="switchTab('services-view')">Manage Services</div>
+        <div class="command-item" onclick="switchTab('team-view')">Manage Team</div>
+        <div class="command-item" onclick="switchTab('portfolio-view')">Manage Portfolio</div>
+        <div class="command-item" onclick="switchTab('marketing-view')">Marketing & FAQs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Custom Delete Modal -->
+  <div id="deleteModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-icon">
+        <i data-lucide="alert-triangle"></i>
+      </div>
+      <h3 id="deleteModalTitle">Delete Confirmation</h3>
+      <p>Are you sure you want to delete <strong id="deleteModalItemName"></strong>?</p>
+      <p class="modal-subtext">This action cannot be undone.</p>
+      
+      <div class="modal-actions">
+        <button type="button" id="cancelDeleteBtn" class="btn-cancel">Cancel</button>
+        <button type="button" id="confirmDeleteBtn" class="btn-confirm-delete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    // Tab Switching Logic
+    function switchTab(targetId) {
+      document.querySelectorAll('.tab-view').forEach(view => view.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const activeTab = document.getElementById(targetId);
+      if (activeTab) activeTab.classList.remove('hidden');
+      
+      const activeNav = document.querySelector(`[data-target="${targetId}"]`);
+      if (activeNav) activeNav.classList.add('active');
+
+      document.getElementById('command-modal').classList.add('hidden');
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.target));
+    });
+
+    // Global Command Palette Shortcut Listener
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('command-modal').classList.toggle('hidden');
+        document.getElementById('command-input').focus();
+      }
+    });
+
+    // Close Modals on Backdrop Click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.add('hidden');
+      });
+    });
+
+    // Initialize Chart.js Graphs
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // Monthly Bookings Chart
+      const bookingsCtx = document.getElementById('bookingsChart');
+      if (bookingsCtx) {
+        new Chart(bookingsCtx, {
+          type: 'line',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+              label: 'Bookings',
+              data: [12, 19, 15, 25, 22, 30],
+              borderColor: '#25d366',
+              tension: 0.3,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { ticks: { color: '#888' }, grid: { color: '#222' } },
+              y: { ticks: { color: '#888' }, grid: { color: '#222' } }
+            }
+          }
+        });
+      }
+
+      // Service Breakdown Pie Chart
+      const servicesCtx = document.getElementById('servicesChart');
+      if (servicesCtx) {
+        new Chart(servicesCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Graphic Design', 'Printing', 'Branding', 'Signage'],
+            datasets: [{
+              data: [40, 25, 20, 15],
+              backgroundColor: ['#38bdf8', '#25d366', '#fb923c', '#a855f7']
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { labels: { color: '#ccc' } } }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
