@@ -9,19 +9,19 @@ require("dotenv").config();
 
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
+
+
 const admin = require('firebase-admin');
 
 let serviceAccount;
 
 if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
-  // Production (Render): Parse the JSON string from Environment Variables
   try {
     serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
   } catch (err) {
     console.error("Failed to parse FIREBASE_SERVICE_ACCOUNT_JSON:", err);
   }
 } else {
-  // Local Development: Require local file
   try {
     serviceAccount = require('./serviceAccountKey.json');
   } catch (err) {
@@ -30,9 +30,11 @@ if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
 }
 
 if (serviceAccount) {
+  // Use admin.credential.cert or admin.initializeApp with credential object
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential ? admin.credential.cert(serviceAccount) : admin.cert(serviceAccount)
   });
+  console.log("Firebase Admin SDK initialized successfully.");
 } else {
   console.error("Firebase Admin SDK failed to initialize: No credentials provided.");
 }
