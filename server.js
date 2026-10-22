@@ -218,13 +218,32 @@ const authenticateAdmin = async (req, res, next) => {
 
 const path = require('path');
 
-// 1. Serve static HTML, CSS, JS, and image assets from the root directory
+// Serve static assets from root
 app.use(express.static(path.join(__dirname)));
 
-// 2. Fallback route: serve index.html for root GET requests
+// Root Homepage
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// Admin Dashboard Route
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+// Admin Login Route
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'));
+});
+
+// Category / Portfolio Route
+app.get('/category', (req, res) => {
+  res.sendFile(path.join(__dirname, 'category.html'));
+});
+
+app.use(express.static(path.join(__dirname), {
+  extensions: ['html']
+}));
 
 // ==========================================================================
 // 4. PUBLIC ENDPOINTS
