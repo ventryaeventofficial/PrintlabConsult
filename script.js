@@ -718,7 +718,7 @@ async function loadPublicFaqs() {
   if (!faqContainer) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/faqs");
+    const res = await fetch(`${API_BASE_URL}/api/faqs`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
     const data = await res.json();
